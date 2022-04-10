@@ -1,17 +1,18 @@
 import React from 'react';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import Product from '../Product/Product';
-import { Link } from 'react-router-dom/cjs/react-router-dom.min';
+
 
 const Cart = (props) => {
     const cart=props.cart;
-    // console.log(cart);
+    //  console.log(cart);
     //const total=cart.reduce((total,prd)=> total+prd.price,0)
     let total=0;
     for(let i=0;i< cart.length;i++){
         const product=cart[i];
-        total=total+product.price;
+        total=total+ (product.price * product.quantity) ;
         total.toFixed(2);
+        
     }
 
     let shipping=0;
@@ -40,10 +41,11 @@ const Cart = (props) => {
             </p>
             <p>Total Price:{grandTotal}</p>
             <br />
+            {
+                props.children
+            }
 
-            <Link to="/review">
-            <button className="main-button">Review Cart</button>
-            </Link>
+            
             
         </div>
     );
